@@ -1,6 +1,5 @@
 
 from lightgbm import LGBMClassifier
-import lightgbm as lgbm
 
 lgbm_params = {
     'n_estimators':10000,
@@ -22,5 +21,5 @@ lgbm_params = {
     'random_state':2019
 }
 
-clf_lgbm = lgbm.LGBMClassifier(**lgbm_params)
+clf_lgbm = LGBMClassifier(**lgbm_params)
 clf_lgbm = clf_lgbm.fit(trn_data,trn_target,eval_set = (val_data,val_target),verbose=100,early_stopping_rounds=200)
