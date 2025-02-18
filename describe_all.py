@@ -24,11 +24,12 @@ def describe_all(df):
         (df.isnull().sum()/len(df)).to_frame(name="missing"),
         left_index=True,right_index=True
     )
-    out = pd.merge(
-        out,
-        df.describe(exclude='number').T[['top','freq']],
-        how='left',left_index=True,right_index=True
-    )
+    if 'object' in list(df.dtypes):
+        out = pd.merge(
+            out,
+            df.describe(exclude='number').T[['top','freq']],
+            how='left',left_index=True,right_index=True
+        )
     out = pd.merge(
         out,
         df.select_dtypes(include='number').agg(["min",p1,p5,p25,p50,p75,p95,p99,"max","mean","std"]).T,
